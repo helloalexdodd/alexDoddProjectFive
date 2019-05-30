@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 
-class Form extends Component {
+// class Form extends Component {
 	// render() {
 	// 	return (
 	// 		<div className="formContainer">
@@ -29,6 +29,6 @@ class Form extends Component {
 	// 		</div>
 	// 	);
 	// }
-}
+// }
 
-export default Form
+// export default Form
