@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import firebase from './firebase';
 import './App.css';
-import Header from './components/Header';
-// import Form from './components/Form';
-import Footer from './components/Footer';
+import Header from "./components/Header";
+import Body from './components/Body';
+import Form from './components/Form';
+import Footer from "./components/Footer";
+import DisplayResults from './components/DisplayResults';
+import ErrorMessage from "./components/ErrorMessage";
+
 
 class App extends Component {
   constructor(){
@@ -11,6 +15,8 @@ class App extends Component {
     this.state = {
       data: [],
       userInput: '',
+      searchResults: [],
+      errorMessage: false,
     }
   };
 
@@ -18,20 +24,14 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     
     dbRef.on('value', (results) => {
-      const newState = Object.entries(results.val());
-      console.log(newState)
+      let foodItems = results.val().foodItems
 
-      const data = newState.map((item) => {
-      
-        for (let i in item[1]) {   
-          let foodItems = item[1][i];
-          console.log(foodItems)
-          return foodItems
-        }
+      let data = foodItems.map((item) => {
+        return item
       });
 
       this.setState({
-        data: data
+        data: data,        
       })
     });
   };
@@ -39,47 +39,49 @@ class App extends Component {
   handleChange = (e) => {
     this.setState({
       userInput: e.target.value,
-    })
+    });
   };
 
   handleClick = (e) => {
     e.preventDefault();
-    for (let i = 0; i < 4; i++) {
-      // if (this.state.data[i][this.state.userInput] === this.state.userInput) {
-        console.log(this.state.data[i][this.state.userInput])
-      }
-  
+    
+    let lowerCaseInput = this.state.userInput.toLowerCase();
+    
+    // this is where we need to do error handling, either all in this function, or in a seperate component if I can
+    for (let i in this.state.data) {
+      this.state.data[i][`Food name`].includes(lowerCaseInput) && this.state.userInput !== '' ? this.state.searchResults.push(this.state.data[i]) : this.setState({errorMessage: true})
+    }
+
     this.setState({
-      userInput: ''
-    })    
+      userInput: ""
+    });    
   };
 
   render () {
     return (
       <div className="App wrapper">
         <Header />
-        <div className="formContainer">
-          <div className="collectiveTextBox">
-            <label htmlFor="textBox" className="visuallyHidden">Enter a food to find out more information.</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              placeholder="Ex. Spinach"
-              value={this.state.userInput}
-            />
-            <button onClick={this.handleClick}>Search</button>
-            <ul>
-              {/* {this.state.data.map((foodItem) => {
-                return (
-                  <li key={foodItem}>
-                    <p>{foodItem}</p>
-                  </li>
-                )
-              })} */}
-            </ul>
-            <Footer />
-          </div>
+        <div className="resultsBox">
+          {this.state.searchResults.map(results => {
+            return <DisplayResults results={results} />;
+          })}
+          {this.state.searchResults.length === 0 && (
+              <p>{this.state.errorMessage}</p>
+            )}
         </div>
+        {this.state.searchResults.length === 0 && 
+          !this.state.errorMessage && (
+          <Body />
+        )}
+        {this.state.errorMessage &&
+          this.state.searchResults.length === 0 && 
+          <ErrorMessage />}
+        <Form
+          myFunction={this.handleChange}
+          value={this.state.userInput}
+          onClick={this.handleClick}
+        />
+        <Footer />
       </div>
     );
   }
