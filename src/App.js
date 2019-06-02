@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import firebase from './firebase';
-import './App.css';
 import Header from "./components/Header";
+import Form from "./components/Form";
 import Body from './components/Body';
-import Form from './components/Form';
-import Footer from "./components/Footer";
-import DisplayResults from './components/DisplayResults';
+import DisplayResults from "./components/DisplayResults";
 import ErrorMessage from "./components/ErrorMessage";
+import Footer from "./components/Footer";
+import "./App.css";
 
 
 class App extends Component {
@@ -47,7 +47,6 @@ class App extends Component {
     
     let lowerCaseInput = this.state.userInput.toLowerCase();
     
-    // this is where we need to do error handling, either all in this function, or in a seperate component if I can
     for (let i in this.state.data) {
       this.state.data[i][`Food name`].includes(lowerCaseInput) && this.state.userInput !== '' ? this.state.searchResults.push(this.state.data[i]) : this.state.searchResults.length === 0 ? this.setState({errorMessage: true}) : this.setState({errorMessage: true})
     }
@@ -55,8 +54,6 @@ class App extends Component {
     this.setState({
       userInput: '',
     });    
-
-    
   };
 
   handleReset = (e) => {
@@ -71,38 +68,43 @@ class App extends Component {
 
   render () {
     return (
-      <div className="App wrapper">
-        <Header />
-        <Form
-          handleChangeFunction={this.handleChange}
-          value={this.state.userInput}
-          onSubmit={this.handleClick}
-          handleResetFunction={this.handleReset}
-        />
-        {this.state.searchResults.length > 0 && (
-          <Fragment>
-            <div className="resultsBox">
-              <h3>
-                The Compatibility Scale is a scale from 0 to 3 and is used
-                to rate an food's overall effect on histamine levels in the
-                body. The lower the number, the more compatible for people
-                with Histamine Intolerance.
-              </h3>
-              {this.state.searchResults.map(results => {
-                return <DisplayResults results={results} />;
-              })}
-            </div>
-          </Fragment>
-        )}
+      <Fragment>
+        <div className="App wrapper">
+          <Header />
+          <Form
+            handleChangeFunction={this.handleChange}
+            value={this.state.userInput}
+            onClick={this.handleClick}
+            handleResetFunction={this.handleReset}
+            onKeyPress={this.handleClick}
+          />
+          {this.state.searchResults.length > 0 && (
+            <Fragment>
+              <div className="messageBox">
+                <h3>
+                  The Compatibility Scale is a scale from <span>0</span> to{" "}
+                  <span>3</span> and is used to rate an food's overall effect
+                  on histamine levels in the body. The lower the number, the
+                  more compatible it is for people with Histamine Intolerance.
+                </h3>
+              </div>
+              <div className="resultsBox">
+                {this.state.searchResults.map(results => {
+                  return <DisplayResults results={results} />;
+                })}
+              </div>
+            </Fragment>
+          )}
           <div className="resultsBox">
             <p>{this.state.errorMessage}</p>
           </div>
-        {this.state.searchResults.length === 0 &&
-          !this.state.errorMessage && <Body />}
-        {this.state.errorMessage &&
-          this.state.searchResults.length === 0 && <ErrorMessage />}
+          {this.state.searchResults.length === 0 &&
+            !this.state.errorMessage && <Body />}
+          {this.state.errorMessage &&
+            this.state.searchResults.length === 0 && <ErrorMessage />}
+        </div>
         <Footer />
-      </div>
+      </Fragment>
     );
   }
 }

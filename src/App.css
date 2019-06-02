@@ -18,8 +18,13 @@ body {
   margin: 0 auto;
 }
 
+focus,
+active {
+  border: 1px dotted purple;
+}
+
 h1 {
-  margin: 60px 0 0;
+  margin: 25px 0 0;
   font-size: 4.5rem;
   text-shadow: 0px 5px 20px rgba(50, 50, 50, 0.4);
 }
@@ -40,7 +45,12 @@ h2 {
 
 h3 {
   font-size: 1.3rem;
-  font-weight: medium;
+}
+
+h3 span {
+  color: #f46036;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 p,
@@ -83,7 +93,7 @@ li::before {
 
 .bodyText span {
   color: #f46036;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .bodyText p:first-of-type::first-letter,
@@ -93,11 +103,14 @@ h2::first-letter {
 
 .bodyText p:first-of-type::first-letter {
   float: left;
-  margin: 5px;
+  margin: 9px 5px 5px;
   padding: 0 6px 8px 4px;
   font-family: 'Vollkorn';
   font-size: 5rem;
+}
 
+.bodyText p:last-of-type {
+  font-weight: 600;
 }
 
 h2::first-letter {
@@ -106,14 +119,14 @@ h2::first-letter {
 
 .bodyText p,
 .resultsBox p,
-.errorMessage ul,
+.messageBox ul,
 h3 {
   text-align: left;
 }
 
 .bodyText,
 .results,
-.errorMessage {
+.messageBox {
   padding: 10px 0 20px 0;
   display: inline-block;
   background-color: #fcfcfc;
@@ -123,8 +136,8 @@ h3 {
 }
 
 .bodyText {
-  width: 65%;
-  margin: 0;
+  width: 80%;
+  margin: 0 0 20px 0;
   padding: 30px;
 }
 
@@ -137,22 +150,35 @@ h3 {
 .resultsBox {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   margin: 0 auto;
   width: 90%;
 }
 
-.results p span {
-  font-weight: bold;
+.results p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.results span,
+.messageBox ul li a {
+  font-weight: 600;
 }
 
 .results {
+  display: flex;
+  flex-direction: column;
   min-height: 460px;
   width: calc(33.33% - 20px);
   margin: 10px;
 }
 
-.errorMessage {
+.messageBox ul li a {
+  color: #f46036;
+}
+
+.messageBox {
   width: 60%;
   margin-bottom: 30px;
 }
@@ -160,8 +186,9 @@ h3 {
 .safetyNotice p {
   color: #f46036;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
 }
+
 
 input[type=text] {
   height: 40px;
@@ -190,8 +217,36 @@ button:hover {
 }
 
 footer p {
-  margin-top: 30px;
+  margin: 30px auto;
   font-size: .9rem;
+}
+
+.footerBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px 0;
+  border-top: 2px solid #1c1d21;
+}
+
+.creator {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.creator p {
+  display: inline-block;
+  margin: 10px;
+  text-align: left;
+}
+
+.fab {
+  margin: 5px;
+  color: #f46036;
+  font-size: 25px;
 }
 
 a {
@@ -201,7 +256,7 @@ a {
   z-index: 1;
 }
 
-a::before {
+.underlineAnimation::before {
   content: '';
   position: absolute;
   left: 5%;
@@ -218,6 +273,12 @@ a::before {
 a:hover::before,
 a:focus::before {
   transform: translateY(110%) scaleX(1.25);
+}
+
+footer button {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
 }
 
 @media (max-width:1180px) {
@@ -293,6 +354,18 @@ a:focus::before {
 
   input[type=text] {
     margin-left: 0;
+  }
+
+  .footerBar {
+    flex-direction: column;
+  }
+
+  .creator {
+    margin: 0 auto;
+  }
+
+  footer button {
+    margin: 10px auto;
   }
 }
 

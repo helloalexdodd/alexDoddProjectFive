@@ -4,7 +4,7 @@ class Header extends Component {
 	render() {
 		return (
       <header className="headerComponent">
-        <h1>Histamine Intolerance Database</h1>
+        <h1>Histamine Intolerance</h1>
       </header>
     );
 	};

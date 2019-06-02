@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class ErrorMessage extends Component {
 	render() {
 		return(
-			<div className="errorMessage">
+			<div className="messageBox">
 				<h3>It seems your search has come back empty. Here are some tips for bettering your search query.</h3>
 				<ul>
 					<li>This database primarily contains whole foods. So, while you may occasionally find more complex products (like mustard, for example) it is generally best practice to search for ingredients rather that products.</li>

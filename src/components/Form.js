@@ -13,9 +13,16 @@ class Form extends Component {
             type="text"
             placeholder="E.g. Spinach"
             value={this.props.userInput}
+            onKeyPress={e => {
+              if (e.key === "Enter") {
+                this.props.onKeyPress(e);
+              }
+            }}
           />
-          <button onClick={this.props.onSubmit}>Search</button>
-          <button onClick={e => this.props.handleResetFunction(e)}>Reset</button>
+          <button onClick={this.props.onClick}>Search</button>
+          <button onClick={e => this.props.handleResetFunction(e)}>
+            Reset
+          </button>
         </div>
       </div>
     );
