@@ -31,8 +31,8 @@ h2 {
 }
 
 h2 {
-  margin: 10px 0 0;
-  padding-top: 20px;
+  margin: 0;
+  padding: 10px 10px 0;
   line-height: 1;
   letter-spacing: 1px;
   font-size: 1.8rem;
@@ -46,7 +46,7 @@ h3 {
 p,
 h3 {
   width: 85%;
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 p,
@@ -74,8 +74,6 @@ li::before {
   height: 7px;
   background-color:#f46036;
   border-radius: 50%;
-  /* transform: translateY(40%) scaleX(1); */
-  /* transition: .4s ease; */
 }
 
 .bodyText p {
@@ -94,10 +92,12 @@ h2::first-letter {
 }
 
 .bodyText p:first-of-type::first-letter {
+  float: left;
   margin: 5px;
   padding: 0 6px 8px 4px;
   font-family: 'Vollkorn';
   font-size: 5rem;
+
 }
 
 h2::first-letter {
@@ -124,8 +124,14 @@ h3 {
 
 .bodyText {
   width: 65%;
-  margin: 20px 0 30px;
+  margin: 0;
   padding: 30px;
+}
+
+.resultsBox h3:first-child {
+  padding: 0 10%;
+  font-size: 1.2rem;
+  text-shadow: 0px 5px 20px rgba(50, 50, 50, 0.4);
 }
 
 .resultsBox {
@@ -136,8 +142,12 @@ h3 {
   width: 90%;
 }
 
+.results p span {
+  font-weight: bold;
+}
+
 .results {
-  height: 460px;
+  min-height: 460px;
   width: calc(33.33% - 20px);
   margin: 10px;
 }
@@ -155,7 +165,8 @@ h3 {
 
 input[type=text] {
   height: 40px;
-  padding-left: 10px;
+  width: 300px;
+  padding-left: 15px;
   margin: 20px;
   background-color: #fcfcfc;
   border: 2px solid #1c1d21;
@@ -166,10 +177,11 @@ input[type=text]::placeholder {
 }
 
 button {
+  margin-right: 20px;
   padding: 8px 20px;
   background-color: #f46036;
   border: 2px solid #1c1d21;
-  transition: .7s;
+  transition: .85s;
   color: #fcfcfc;
 }
 
@@ -241,21 +253,46 @@ a:focus::before {
 }
 
 @media (max-width:690px) {
+  .bodyText {
+    padding: 20px;
+  }
+  
   h1 {
     font-size: 3.5rem;
   }
  
+  .resultsBox h3:first-child {
+    padding: 0;
+  }
+
   .results {
     width: calc(80% - 20px);
+  }
+
+  input[type=text] {
+    width: auto;
   }
 }
 
 @media (max-width:520px) {
+  .bodyText {
+    padding: 10px;
+  }
+  
   .resultsBox {
     width: 100%;
   }
   .results {
     width: calc(90% - 20px);
+  }
+
+  .collectiveTextBox {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  input[type=text] {
+    margin-left: 0;
   }
 }
 
