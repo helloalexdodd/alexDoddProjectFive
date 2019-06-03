@@ -18,11 +18,6 @@ body {
   margin: 0 auto;
 }
 
-focus,
-active {
-  border: 1px dotted purple;
-}
-
 h1 {
   margin: 25px 0 0;
   font-size: 4.5rem;
@@ -37,7 +32,7 @@ h2 {
 
 h2 {
   margin: 0;
-  padding: 10px 10px 0;
+  padding: 20px 10px 0;
   line-height: 1;
   letter-spacing: 1px;
   font-size: 1.8rem;
@@ -46,7 +41,6 @@ h2 {
 h3 {
   font-weight: 500;
   font-size: 1.3rem;
-  color: #f46036;
 }
 
 .messageBox h3 {
@@ -170,7 +164,6 @@ h3 {
 .results {
   display: flex;
   flex-direction: column;
-  min-height: 460px;
   width: calc(33.33% - 20px);
   margin: 10px;
 }
@@ -240,12 +233,12 @@ footer p {
 
 .creator p {
   display: inline-block;
-  margin: 10px;
+  margin: 5px 15px;
   text-align: left;
 }
 
 .fab {
-  margin: 5px;
+  margin: 0 15px;
   color: #f46036;
   font-size: 25px;
 }
@@ -307,6 +300,11 @@ i:hover {
   .results {
     width: calc(50% - 20px);
   }
+
+  .messageBox {
+    width: calc(90% - 20px);
+    margin: 20px auto;
+  }
 }
 
 @media (max-width:860px) {
@@ -317,9 +315,15 @@ i:hover {
   .resultsBox {
     width: 100%;
   }
+  
   .results {
     width: calc(50% - 20px);
   }
+
+  .messageBox {
+    width: calc(100% - 20px);
+  }
+
 }
 
 @media (max-width:690px) {
@@ -336,6 +340,10 @@ i:hover {
   }
 
   .results {
+    width: calc(80% - 20px);
+  }
+
+  .messageBox {
     width: calc(80% - 20px);
   }
 
@@ -356,6 +364,10 @@ i:hover {
     width: calc(90% - 20px);
   }
 
+  .messageBox {
+    width: calc(90% - 20px);
+  }
+  
   .collectiveTextBox {
     margin: 0 auto;
     text-align: center;
@@ -380,12 +392,7 @@ i:hover {
 
 @media (max-width:400px) {
   h2 {
-    padding-top: 0;
     font-size: 1.5rem;
-  }
-  
-  h3 {
-    font-size: 1.2rem;
   }
 
   .safetyNotice p,
@@ -393,8 +400,16 @@ i:hover {
    font-size: 1rem;
   }
 
+  .bodyText {
+    padding: 0px;
+  }
+
   .results {
     height: 430px;
+    width: calc(100% - 20px);
+  }
+
+  .messageBox {
     width: calc(100% - 20px);
   }
 }

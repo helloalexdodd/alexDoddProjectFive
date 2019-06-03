@@ -110,9 +110,10 @@ class App extends Component {
               <div className="messageBox">
                 <h3>
                   The Compatibility Scale is a scale from <span>0</span> to{" "}
-                  <span>3</span> and is used to rate an food's overall effect on
-                  histamine levels in the body. The lower the number, the more
-                  compatible it is for people with Histamine Intolerance.
+                  <span>3</span> and is used to rate an food's overall
+                  effect on histamine levels in the body. The lower the
+                  number, the more compatible it is for people with
+                  Histamine Intolerance.
                 </h3>
               </div>
               <div className="resultsBox">
@@ -127,12 +128,15 @@ class App extends Component {
           </div>
           {this.state.searchResults.length === 0 &&
             !this.state.errorMessage && <Body />}
-          {this.state.errorMessage && this.state.searchResults.length === 0 && (
-            <ErrorMessage />
-          )}
+          {this.state.errorMessage &&
+            this.state.searchResults.length === 0 && <ErrorMessage />}
         </div>
+        {this.state.user ? (
+          <button onClick={this.logout}>Log Out</button>
+        ) : (
+          <button onClick={this.login}>Log In</button>
+        )}
         <Footer />
-        {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>}
       </Fragment>
     );
   }
