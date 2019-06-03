@@ -53,6 +53,12 @@ class Footer extends Component {
               <i className="fab fa-twitter" />
             </a>
           </div>
+          {/* related to user authentication */}
+          {/* {this.props.user ? (
+          <button onClick={this.props.logout}>Log Out</button>
+        ) : (
+          <button onClick={this.props.login}>Log In</button>
+        )} */}
         </div>
       </footer>
     );

@@ -18,8 +18,9 @@ class Form extends Component {
                 this.props.onKeyPress(e);
               }
             }}
+            tabIndex="01"
           />
-          <button onClick={this.props.onClick}>Search</button>
+          <button onClick={this.props.onClick} tabIndex="02">Search</button>
         </div>
       </div>
     );

@@ -3,10 +3,10 @@ import React, {Component} from "react";
 class DisplayResults extends Component {
   render() {
     return (
-      <div className="results">
+      <div className="results" tabIndex="00">
         <h2>{this.props.results[`Food name`]}</h2>
         <h3>
-          {`Compatability Scale:  `}
+          {`Compatibility Scale:  `}
           <span>{this.props.results[`Compatibility`]}</span>
         </h3>
         <div className="safetyNotice">

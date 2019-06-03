@@ -7,7 +7,7 @@ import DisplayResults from "./components/DisplayResults";
 import ErrorMessage from "./components/ErrorMessage";
 import Footer from "./components/Footer";
 import "./App.css";
-
+//couldn't get user authentication functioning by deadline, but I didn't want to delete the code since I will be implementing it in the future.
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
@@ -37,7 +37,7 @@ class App extends Component {
         data: data
       });
     });
-
+    //related to user authentication
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
@@ -75,7 +75,7 @@ class App extends Component {
     );
     e.preventDefault();
   };
-
+  //related to user authentication
   login = () => {
     auth.signInWithPopup(provider).then(result => {
       const user = result.user;
@@ -84,7 +84,7 @@ class App extends Component {
       });
     });
   };
-
+  //related to user authentication
   logout = () => {
     auth.signOut().then(() => {
       this.setState({
@@ -131,12 +131,7 @@ class App extends Component {
           {this.state.errorMessage &&
             this.state.searchResults.length === 0 && <ErrorMessage />}
         </div>
-        {this.state.user ? (
-          <button onClick={this.logout}>Log Out</button>
-        ) : (
-          <button onClick={this.login}>Log In</button>
-        )}
-        <Footer />
+        <Footer user={this.state.user} login={this.login} logout={this.logout}/>
       </Fragment>
     );
   }
