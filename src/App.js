@@ -112,8 +112,7 @@ class App extends Component {
                   The Compatibility Scale is a scale from <span>0</span> to{" "}
                   <span>3</span> and is used to rate an food's overall
                   effect on histamine levels in the body. The lower the
-                  number, the more compatible it is for people with
-                  Histamine Intolerance.
+                  number, the more compatible.
                 </h3>
               </div>
               <div className="resultsBox">
