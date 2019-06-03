@@ -1,7 +1,7 @@
 {
   "name": "alex-dodd-project-five",
   "version": "0.1.0",
-  "homepage": "https://yourusername.github.io/repository-name",
+  "homepage": "https://helloalexdodd.github.io/alexDoddProjectFive",
   "private": true,
   "dependencies": {
     "firebase": "^6.1.0",
