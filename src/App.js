@@ -8,65 +8,92 @@ import ErrorMessage from "./components/ErrorMessage";
 import Footer from "./components/Footer";
 import "./App.css";
 
+const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       data: [],
-      userInput: '',
+      userInput: "",
       searchResults: [],
       errorMessage: false,
-    }
-  };
+      user: null
+    };
+  }
 
   componentDidMount() {
     const dbRef = firebase.database().ref();
-    
-    dbRef.on('value', (results) => {
-      let foodItems = results.val().foodItems
 
-      let data = foodItems.map((item) => {
-        return item
+    dbRef.on("value", results => {
+      let foodItems = results.val().foodItems;
+
+      let data = foodItems.map(item => {
+        return item;
       });
 
       this.setState({
-        data: data,        
-      })
+        data: data
+      });
     });
-  };
 
-  handleChange = (e) => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
+  }
+
+  handleChange = e => {
     this.setState({
-      userInput: e.target.value,
+      userInput: e.target.value
     });
   };
 
-  handleClick = (e) => {
+  handleClick = e => {
+    this.setState(
+      {
+        searchResults: []
+      },
+      () => {
+        let lowerCaseInput = this.state.userInput.toLowerCase();
+
+        for (let i in this.state.data) {
+          this.state.data[i]["Food name"].includes(lowerCaseInput) &&
+          this.state.userInput !== ""
+            ? this.state.searchResults.push(this.state.data[i])
+            : this.state.searchResults.length === 0
+            ? this.setState({ errorMessage: true })
+            : this.setState({ errorMessage: true });
+        }
+
+        this.setState({
+          userInput: ""
+        });
+      }
+    );
     e.preventDefault();
-    
-    let lowerCaseInput = this.state.userInput.toLowerCase();
-    
-    for (let i in this.state.data) {
-      this.state.data[i][`Food name`].includes(lowerCaseInput) && this.state.userInput !== '' ? this.state.searchResults.push(this.state.data[i]) : this.state.searchResults.length === 0 ? this.setState({errorMessage: true}) : this.setState({errorMessage: true})
-    }
-
-    this.setState({
-      userInput: '',
-    });    
   };
 
-  handleReset = (e) => {
-    e.preventDefault();
-
-    this.setState({
-      searchResults: [],
-      userInput: '',
-      errorMessage: false
+  login = () => {
+    auth.signInWithPopup(provider).then(result => {
+      const user = result.user;
+      this.setState({
+        user
+      });
     });
   };
 
-  render () {
+  logout = () => {
+    auth.signOut().then(() => {
+      this.setState({
+        user: null
+      });
+    });
+  };
+
+  render() {
     return (
       <Fragment>
         <div className="App wrapper">
@@ -83,9 +110,9 @@ class App extends Component {
               <div className="messageBox">
                 <h3>
                   The Compatibility Scale is a scale from <span>0</span> to{" "}
-                  <span>3</span> and is used to rate an food's overall effect
-                  on histamine levels in the body. The lower the number, the
-                  more compatible it is for people with Histamine Intolerance.
+                  <span>3</span> and is used to rate an food's overall effect on
+                  histamine levels in the body. The lower the number, the more
+                  compatible it is for people with Histamine Intolerance.
                 </h3>
               </div>
               <div className="resultsBox">
@@ -100,10 +127,12 @@ class App extends Component {
           </div>
           {this.state.searchResults.length === 0 &&
             !this.state.errorMessage && <Body />}
-          {this.state.errorMessage &&
-            this.state.searchResults.length === 0 && <ErrorMessage />}
+          {this.state.errorMessage && this.state.searchResults.length === 0 && (
+            <ErrorMessage />
+          )}
         </div>
         <Footer />
+        {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>}
       </Fragment>
     );
   }

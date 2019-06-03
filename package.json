@@ -1,6 +1,7 @@
 {
   "name": "alex-dodd-project-five",
   "version": "0.1.0",
+  "homepage": "https://helloalexdod.github.io/alex-dodd-project-five",
   "private": true,
   "dependencies": {
     "firebase": "^6.1.0",
@@ -28,5 +29,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
   }
 }

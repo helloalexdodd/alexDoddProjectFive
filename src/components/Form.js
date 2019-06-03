@@ -12,7 +12,7 @@ class Form extends Component {
             onChange={e => this.props.handleChangeFunction(e)}
             type="text"
             placeholder="E.g. Spinach"
-            value={this.props.userInput}
+            value={this.props.value}
             onKeyPress={e => {
               if (e.key === "Enter") {
                 this.props.onKeyPress(e);
@@ -20,9 +20,6 @@ class Form extends Component {
             }}
           />
           <button onClick={this.props.onClick}>Search</button>
-          <button onClick={e => this.props.handleResetFunction(e)}>
-            Reset
-          </button>
         </div>
       </div>
     );

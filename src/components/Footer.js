@@ -53,7 +53,6 @@ class Footer extends Component {
               <i className="fab fa-twitter" />
             </a>
           </div>
-          <button>Login</button>
         </div>
       </footer>
     );
