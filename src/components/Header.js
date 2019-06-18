@@ -5,8 +5,8 @@ class Header extends Component {
 		return (
       <header className="headerComponent">
         <h1>Histamine Intolerance</h1>
-        <h2>and Mast Cell Activation Disorder</h2>
-        <h3>Food Compatibility Database</h3>
+        <h2>Food Compatibility Database</h2>
+				<p>Enter a food item to get more information.</p>
       </header>
     );
 	};

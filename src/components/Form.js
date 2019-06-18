@@ -21,6 +21,7 @@ class Form extends Component {
             tabIndex="01"
           />
           <button onClick={this.props.onClick} tabIndex="02">Search</button>
+					{this.props.user ? <button onClick={this.props.logout}>Log Out</button> : <button onClick={this.props.login}>Log In</button>}
         </div>
       </div>
     );

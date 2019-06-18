@@ -5,9 +5,10 @@ import Form from "./components/Form";
 import Body from './components/Body';
 import DisplayResults from "./components/DisplayResults";
 import ErrorMessage from "./components/ErrorMessage";
+import LengthError from "./components/LengthError";
 import Footer from "./components/Footer";
 import "./App.css";
-//couldn't get user authentication functioning by deadline, but I didn't want to delete the code since I will be implementing it in the future.
+
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
@@ -19,6 +20,7 @@ class App extends Component {
       userInput: "",
       searchResults: [],
       errorMessage: false,
+      lengthError: false,
       user: null
     };
   }
@@ -37,7 +39,7 @@ class App extends Component {
         data: data
       });
     });
-    //related to user authentication
+
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
@@ -52,39 +54,52 @@ class App extends Component {
   };
 
   handleClick = e => {
-    this.setState(
-      {
-        searchResults: []
-      },
-      () => {
-        let lowerCaseInput = this.state.userInput.toLowerCase();
+    this.setState({
+        searchResults: [],
+        errorMessage: false,
+        lengthError: false
+      }, () => {
+        const lowerCaseInput = this.state.userInput.toLowerCase();
+				const lengthArray = this.state.userInput.split("");
+				const searchResults = [];
 
-        for (let i in this.state.data) {
-          this.state.data[i]["Food name"].includes(lowerCaseInput) &&
-          this.state.userInput !== ""
-            ? this.state.searchResults.push(this.state.data[i])
-            : this.state.searchResults.length === 0
-            ? this.setState({ errorMessage: true })
-            : this.setState({ errorMessage: true });
-        }
+				for (let i in this.state.data) {
+				
+					if (lengthArray.length < 3) {
+						this.setState({ lengthError: true });
+				
+					} else if (this.state.data[i]["Food name"].includes(lowerCaseInput)) {
+						searchResults.push(this.state.data[i]);
+					} 
 
         this.setState({
-          userInput: ""
+          userInput: "",
         });
-      }
-    );
+			}
+
+			this.setState({ searchResults }, () => {
+				
+				console.log(this.state.searchResults.length)
+				
+				if (this.state.searchResults.length < 1) {
+					this.setState({
+						errorMessage: true
+					});
+				}
+			});
+		});
     e.preventDefault();
   };
-  //related to user authentication
+
   login = () => {
-    auth.signInWithPopup(provider).then(result => {
+    auth.signInWithRedirect(provider).then(result => {
       const user = result.user;
       this.setState({
         user
       });
     });
   };
-  //related to user authentication
+
   logout = () => {
     auth.signOut().then(() => {
       this.setState({
@@ -103,16 +118,19 @@ class App extends Component {
             value={this.state.userInput}
             onClick={this.handleClick}
             handleResetFunction={this.handleReset}
-            onKeyPress={this.handleClick}
+						onKeyPress={this.handleClick}
+						user={this.state.user}
+						login={this.login}
+						logout={this.logout}
           />
           {this.state.searchResults.length > 0 && (
             <Fragment>
               <div className="messageBox">
                 <h3>
                   The Compatibility Scale is a scale from <span>0</span> to{" "}
-                  <span>3</span> and is used to rate an food's overall
-                  effect on histamine levels in the body. The lower the
-                  number, the more compatible.
+                  <span>3</span> and is used to rate a food's overall effect on
+                  histamine levels in the body. The lower the number, the more
+                  compatible.
                 </h3>
               </div>
               <div className="resultsBox">
@@ -122,15 +140,11 @@ class App extends Component {
               </div>
             </Fragment>
           )}
-          <div className="resultsBox">
-            <p>{this.state.errorMessage}</p>
-          </div>
-          {this.state.searchResults.length === 0 &&
-            !this.state.errorMessage && <Body />}
-          {this.state.errorMessage &&
-            this.state.searchResults.length === 0 && <ErrorMessage />}
+          {!this.state.errorMessage && !this.state.lengthError && this.state.searchResults.length < 1 && <Body />}
+          {this.state.lengthError && <LengthError />}
+          {this.state.errorMessage && <ErrorMessage />}
         </div>
-        <Footer user={this.state.user} login={this.login} logout={this.logout}/>
+        <Footer />
       </Fragment>
     );
   }

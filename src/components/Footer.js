@@ -4,61 +4,55 @@ class Footer extends Component {
 	render() {
 		return (
       <footer>
-        <p>
-          All database information provided by the{" "}
-          <a
-            className="underlineAnimation"
-            href="http://www.histaminintoleranz.ch"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Swiss Interest Group Histamine Intolerance (SIGHI)
-          </a>
-        </p>
-        <div className="footerBar wrapper">
-          <div className="creator">
-            <p>
-              Created by{" "}
-              <a
-                className="underlineAnimation"
-                href="https://www.alexdodd.ca"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Alex Dodd
+				<div className="creator wrapper">
+					<p>
+						Created by{" "}
+						<a
+							className="underlineAnimation"
+							href="https://www.alexdodd.ca"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Alex Dodd
               </a>
-            </p>
-            <a
-              aria-label="Go to Github page"
-              href="https://github.com/helloalexdodd/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-github" />
-            </a>
-            <a
-              aria-label="Go to LinkedIn page"
-              href="https://www.linkedin.com/in/helloalexdodd/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-linkedin" />
-            </a>
-            <a
-              aria-label="Go to Twitter page"
-              href="https://twitter.com/helloalexdodd"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-twitter" />
-            </a>
-          </div>
-          {/* related to user authentication */}
-          {/* {this.props.user ? (
-          <button onClick={this.props.logout}>Log Out</button>
-        ) : (
-          <button onClick={this.props.login}>Log In</button>
-        )} */}
+					</p>
+					<a
+						aria-label="Go to Github page"
+						href="https://github.com/helloalexdodd/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<i className="fab fa-github" />
+					</a>
+					<a
+						aria-label="Go to LinkedIn page"
+						href="https://www.linkedin.com/in/helloalexdodd/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<i className="fab fa-linkedin" />
+					</a>
+					<a
+						aria-label="Go to Twitter page"
+						href="https://twitter.com/helloalexdodd"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<i className="fab fa-twitter" />
+					</a>
+				</div>
+        <div className="footerBar wrapper">
+					<p>
+						All database information provided by the{" "}
+						<a
+							className="underlineAnimation"
+							href="http://www.histaminintoleranz.ch"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Swiss Interest Group Histamine Intolerance (SIGHI)
+          	</a>
+					</p>
         </div>
       </footer>
     );

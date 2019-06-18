@@ -30,8 +30,8 @@ h2 {
 }
 
 h1,
-h2,
-h3 {
+header h2,
+header h3 {
   text-shadow: 0px 5px 20px rgba(50, 50, 50, 0.4);
 }
 
@@ -63,6 +63,11 @@ header h3 {
   font-family: "Vollkorn", serif;
   font-size: 1.7rem;
   text-align: center;
+}
+
+header p {
+	margin: 0 auto;
+	padding: 30px 0 0;
 }
 
 h3 span {
@@ -165,8 +170,14 @@ button {
 .creator {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: flex-end;
+	justify-content: flex-end;
+	text-align: center;
+	width: 80%;
+	margin: 30px auto;
+	font-size: .9rem;
 }
+
+.creator
 
 .fab {
   margin: 0 15px;
@@ -224,6 +235,7 @@ h3 {
 }
 
 .messageBox h3 {
+  font-weight: bold;
   color: #1c1d21;
 }
 
@@ -235,11 +247,6 @@ h3 {
   color: #f46036;
   font-size: 1rem;
   font-weight: 600;
-}
-
-footer p {
-  margin: 30px auto;
-  font-size: .9rem;
 }
 
 footer button {
@@ -407,10 +414,6 @@ input[type="text"]:focus {
 
   .footerBar {
     flex-direction: column;
-  }
-
-  .creator {
-    margin: 0 auto;
   }
 
   footer button {

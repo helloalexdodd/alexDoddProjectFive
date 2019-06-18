@@ -4,11 +4,13 @@ class DisplayResults extends Component {
   render() {
     return (
       <div className="results" tabIndex="00">
-        <h2>{this.props.results[`Food name`]}</h2>
-        <h3>
-          {`Compatibility Scale:  `}
-          <span>{this.props.results[`Compatibility`]}</span>
-        </h3>
+        <div>
+          <h2>{this.props.results[`Food name`]}</h2>
+          <h3>
+            {`Compatibility Scale:  `}
+            <span>{this.props.results[`Compatibility`]}</span>
+          </h3>
+        </div>
         <div className="safetyNotice">
           {this.props.results["Compatibility"] === 0 && (
             <p>This should be safe to consume.</p>
@@ -63,7 +65,7 @@ class DisplayResults extends Component {
           </p>
         ) : (
           <p>
-            Histamine Liberator:<span>No</span>
+            Histamine Liberator: <span>No</span>
           </p>
         )}
 
