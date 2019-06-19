@@ -64,10 +64,8 @@ class App extends Component {
 				const searchResults = [];
 
 				for (let i in this.state.data) {
-				
 					if (lengthArray.length < 3) {
 						this.setState({ lengthError: true });
-				
 					} else if (this.state.data[i]["Food name"].includes(lowerCaseInput)) {
 						searchResults.push(this.state.data[i]);
 					} 
@@ -77,11 +75,8 @@ class App extends Component {
         });
 			}
 
-			this.setState({ searchResults }, () => {
-				
-				console.log(this.state.searchResults.length)
-				
-				if (this.state.searchResults.length < 1) {
+			this.setState({ searchResults }, () => {	
+				if (this.state.searchResults.length < 1 && lengthArray.length >= 3) {
 					this.setState({
 						errorMessage: true
 					});
