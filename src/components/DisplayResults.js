@@ -2,10 +2,16 @@ import React, {Component} from "react";
 
 class DisplayResults extends Component {
   render() {
+		const nameArray = this.props.results[`Food name`].split("");
+		const capitalLetter = nameArray[0].toUpperCase();
+		const removeFirstLetter = nameArray.shift()
+		const newNameArray = nameArray.unshift(capitalLetter)
+		const newName = nameArray.join("")
+
     return (
       <div className="results" tabIndex="00">
         <div>
-          <h2>{this.props.results[`Food name`]}</h2>
+					<h2>{newName}</h2>
           <h3>
             {`Compatibility Scale:  `}
             <span>{this.props.results[`Compatibility`]}</span>

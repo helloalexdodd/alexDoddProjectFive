@@ -128,12 +128,16 @@ button {
 .bodyText,
 .results,
 .messageBox {
-  padding: 10px 0 20px 0;
   display: inline-block;
   background-color: #fcfcfc;
   border: none;
   -webkit-box-shadow: 0px 15px 10px rgba(50, 50, 50, 0.7);
   box-shadow: 0px 15px 10px rgba(50, 50, 50, 0.7);
+}
+
+.bodyText,
+.messageBox {
+  padding: 40px 10px;
 }
 
 .resultsBox {
@@ -146,10 +150,11 @@ button {
 }
 
 .results {
+	padding: 30px;
   display: flex;
   flex-direction: column;
   width: calc(33.33% - 20px);
-  margin: 10px;
+  margin: 20px 10px;
 }
 
 .messageBox {
